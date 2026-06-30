@@ -198,6 +198,10 @@ Automation:
 - AI trading bot promising profit
 - "guaranteed returns" trading systems
 - vague AI alpha-generation projects
+- betting, gambling, sportsbook, or prediction-market jobs
+- Polymarket or similar event-betting market jobs
+- options trading jobs
+- options strategy, options scanner, or options execution automation
 - generic chatbot projects with no clear workflow or data source
 - automation jobs where the buyer cannot define the workflow
 - low-budget website or Shopify setup work
