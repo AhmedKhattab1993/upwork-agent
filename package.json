@@ -9,7 +9,8 @@
   },
   "scripts": {
     "auth": "node src/auth.js",
-    "jobs": "node src/fetchJobs.js",
+    "jobs": "node src/fetchJobs.js 1000",
+    "jobs:sample": "node src/fetchJobs.js 10",
     "me": "node src/me.js"
   }
 }

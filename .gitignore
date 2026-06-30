@@ -9,6 +9,9 @@ tokens.json
 node_modules/
 npm-debug.log*
 
+# generated data
+data/
+
 # misc
 .DS_Store
 *.log

@@ -41,11 +41,17 @@ to the local server, which exchanges the code and saves tokens to
 node src/me.js
 ```
 
-### 3. Fetch jobs
+### 3. Fetch latest software-development jobs
 
 ```sh
-node src/fetchJobs.js "react node" 10
+npm run jobs:sample
+npm run jobs
 ```
+
+`fetchJobs` does not use keyword search. It fetches Upwork's native latest feed
+for the `Web, Mobile & Software Dev` category (`531770282580668418`) with the
+GraphQL `RECENCY` sort. Upwork caps each response at 50 jobs, so the 1000-job
+run walks 20 pages and writes JSONL plus a summary file under `data/`.
 
 ## Files
 
@@ -55,7 +61,7 @@ node src/fetchJobs.js "react node" 10
 | `src/auth.js`       | OAuth2 authorization-code flow + local callback server |
 | `src/tokenStore.js` | Save/load/expire-check the access+refresh tokens |
 | `src/client.js`     | GraphQL client with automatic token refresh |
-| `src/fetchJobs.js`  | Example job-search query |
+| `src/fetchJobs.js`  | Native-recency software-development job exporter |
 | `src/me.js`         | Minimal auth smoke test |
 
 ## Notes
