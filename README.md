@@ -56,6 +56,19 @@ run walks 20 pages and writes JSONL plus a summary file under `data/`.
 Use [docs/classification-guide.md](docs/classification-guide.md) when assigning
 semantic trend tags to fetched jobs.
 
+### 4. Export proposal history
+
+```sh
+npm run proposals
+npm run proposals -- data/upwork-proposal-history.json
+```
+
+This walks every readable freelancer proposal status bucket, deduplicates
+overlapping API results by proposal id, and writes a JSON document with a
+summary plus full proposal records under `data/`. Each record includes the
+proposal cover letter, proposal terms/status/timestamps, and the linked job
+posting details that the current OAuth app can read.
+
 ## Files
 
 | File | Purpose |
@@ -65,6 +78,7 @@ semantic trend tags to fetched jobs.
 | `src/tokenStore.js` | Save/load/expire-check the access+refresh tokens |
 | `src/client.js`     | GraphQL client with automatic token refresh |
 | `src/fetchJobs.js`  | Native-recency software-development job exporter |
+| `src/fetchProposalHistory.js` | Freelancer proposal-history JSON exporter |
 | `src/me.js`         | Minimal auth smoke test |
 
 ## Notes
