@@ -7,7 +7,6 @@ const PRIMARY_TAGS = new Set([
   'web-app-saas',
   'mobile-app',
   'ai-apps-agents',
-  'ai-feature-integration',
   'automation-integration',
   'crm-erp-business-systems',
   'data-scraping-pipelines',
@@ -46,13 +45,8 @@ const RULES = [
   },
   {
     tag: 'ai-apps-agents',
-    patterns: [/\bai agent\b/, /\bagents?\b/, /\brag\b/, /\bchatbot\b/, /\bcopilot\b/, /\bai saas\b/, /\bai platform\b/, /\bllm workflow\b/, /\bgenerative ai\b/, /\bai receptionist\b/],
-    rationale: 'AI is central to the product value, not just an add-on feature.',
-  },
-  {
-    tag: 'ai-feature-integration',
-    patterns: [/\bopenai\b/, /\bclaude\b/, /\bdeepseek\b/, /\blangchain\b/, /\bllm\b/, /\bai integration\b/, /\bai feature\b/, /\bai summary\b/, /\bai support\b/, /\bai automation\b/, /\bai solutions\b/, /\bprompt\b/],
-    rationale: 'The posting asks to add AI capability into an existing product or workflow.',
+    patterns: [/\bai agent\b/, /\bagents?\b/, /\brag\b/, /\bchatbot\b/, /\bcopilot\b/, /\bai saas\b/, /\bai platform\b/, /\bllm workflow\b/, /\bgenerative ai\b/, /\bai receptionist\b/, /\bopenai\b/, /\bclaude\b/, /\bdeepseek\b/, /\blangchain\b/, /\bllm\b/, /\bai integration\b/, /\bai feature\b/, /\bai summary\b/, /\bai support\b/, /\bai automation\b/, /\bai solutions\b/, /\bprompt\b/],
+    rationale: 'AI is central to the requested product, feature, or workflow outcome.',
   },
   {
     tag: 'mobile-app',

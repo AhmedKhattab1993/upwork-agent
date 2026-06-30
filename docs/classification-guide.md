@@ -52,18 +52,13 @@ app store work, mobile UX, mobile backend when the app is the main product.
 
 ### `ai-apps-agents`
 
-AI-native products where AI is central to the product's value.
+AI products, AI agents, and AI features where AI is central to the buyer's
+requested outcome.
 
 Typical examples: AI agent, RAG system, chatbot product, AI SaaS, copilot,
-LLM workflow engine, AI research or generation platform.
-
-### `ai-feature-integration`
-
-Adding AI into an otherwise normal app, website, workflow, CRM, or ecommerce
-system.
-
-Typical examples: add OpenAI to an app, Claude integration, AI summary feature,
-AI support widget, prompt workflow inside an existing product.
+LLM workflow engine, AI research or generation platform, add OpenAI to an app,
+Claude integration, AI summary feature, AI support widget, prompt workflow
+inside an existing product.
 
 ### `automation-integration`
 
@@ -217,8 +212,8 @@ Examples:
 
 1. Choose the tag that best captures the buyer's business outcome, not the
    implementation stack.
-2. If AI is the product, use `ai-apps-agents`. If AI is added to another
-   product, use `ai-feature-integration`.
+2. If AI is central to the requested outcome, use `ai-apps-agents`, whether AI
+   is the product or a feature added to another product.
 3. If the job is ecommerce and also a website redesign, use
    `ecommerce-storefront`.
 4. If the job is an internal business platform built in Zoho, Salesforce, Odoo,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T13:24:41.107Z",
+  "generatedAt": "2026-06-30T13:27:44.299Z",
   "guidePath": "/Users/ahmedkhattab/Projects/upwork-agent/docs/classification-guide.md",
   "inputPath": "/Users/ahmedkhattab/Projects/upwork-agent/data/latest-software-dev-1000.jsonl",
   "outputPath": "/Users/ahmedkhattab/Projects/upwork-agent/data/latest-software-dev-1000.classifications.jsonl",
@@ -9,8 +9,7 @@
     "ecommerce-storefront": 232,
     "web-app-saas": 95,
     "mobile-app": 116,
-    "ai-apps-agents": 40,
-    "ai-feature-integration": 39,
+    "ai-apps-agents": 79,
     "automation-integration": 8,
     "crm-erp-business-systems": 86,
     "data-scraping-pipelines": 16,
