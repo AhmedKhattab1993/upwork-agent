@@ -25,9 +25,9 @@ export function Badge({ className, variant = 'default', ...props }) {
         'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors',
         variant === 'default' && 'border-transparent bg-primary text-primary-foreground',
         variant === 'secondary' && 'border-transparent bg-secondary text-secondary-foreground',
-        variant === 'outline' && 'text-foreground',
-        variant === 'success' && 'border-emerald-200 bg-emerald-50 text-emerald-700',
-        variant === 'warning' && 'border-amber-200 bg-amber-50 text-amber-700',
+        variant === 'outline' && 'border-border bg-background/40 text-foreground',
+        variant === 'success' && 'border-emerald-500/40 bg-emerald-950/60 text-emerald-200',
+        variant === 'warning' && 'border-amber-500/40 bg-amber-950/60 text-amber-200',
         className
       )}
       {...props}

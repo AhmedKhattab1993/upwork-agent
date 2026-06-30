@@ -22,22 +22,22 @@ const LANES = [
     id: 'trading',
     label: 'Trading',
     icon: TrendingUp,
-    color: 'border-l-sky-600',
-    badge: 'bg-sky-50 text-sky-700 border-sky-200',
+    color: 'border-l-sky-400',
+    badge: 'bg-sky-950/70 text-sky-200 border-sky-500/40',
   },
   {
     id: 'ai-agents',
     label: 'AI Agents',
     icon: Bot,
-    color: 'border-l-violet-600',
-    badge: 'bg-violet-50 text-violet-700 border-violet-200',
+    color: 'border-l-violet-400',
+    badge: 'bg-violet-950/70 text-violet-200 border-violet-500/40',
   },
   {
     id: 'automation',
     label: 'Automation',
     icon: DatabaseZap,
-    color: 'border-l-emerald-600',
-    badge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    color: 'border-l-emerald-400',
+    badge: 'bg-emerald-950/70 text-emerald-200 border-emerald-500/40',
   },
 ];
 
@@ -135,10 +135,10 @@ function App() {
   return (
     <main className="min-h-screen px-4 py-5 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-5">
-        <section className="flex flex-col gap-4 rounded-lg border bg-card/90 p-5 shadow-sm backdrop-blur md:flex-row md:items-center md:justify-between">
+        <section className="flex flex-col gap-4 rounded-lg border bg-card/90 p-5 shadow-sm shadow-black/25 backdrop-blur md:flex-row md:items-center md:justify-between">
           <div className="max-w-3xl">
             <div className="mb-2 flex flex-wrap items-center gap-2">
-              <Badge variant="outline" className="bg-white">Upwork API</Badge>
+              <Badge variant="outline" className="bg-background/60">Upwork API</Badge>
               <Badge variant="secondary">Three-lane positioning</Badge>
             </div>
             <h1 className="text-2xl font-semibold tracking-normal sm:text-3xl">Latest Upwork lane dashboard</h1>
@@ -161,7 +161,7 @@ function App() {
         </section>
 
         {error && (
-          <Card className="border-red-200 bg-red-50 text-red-900">
+          <Card className="border-red-500/30 bg-red-950/60 text-red-100">
             <CardContent className="flex items-start gap-3 p-4">
               <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
               <div>
