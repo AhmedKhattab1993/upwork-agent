@@ -3,9 +3,10 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const PRIMARY_TAGS = new Set([
-  'website-build-redesign',
+  'web-app-development',
+  'web-design',
+  'conversion-seo-sales',
   'ecommerce-storefront',
-  'web-app-saas',
   'mobile-app',
   'ai-apps-agents',
   'automation-integration',
@@ -36,8 +37,8 @@ const RULES = [
   },
   {
     tag: 'ecommerce-storefront',
-    patterns: [/\bshopify\b/, /\bwoocommerce\b/, /\bmagento\b/, /\bbigcommerce\b/, /\be-?commerce\b/, /\bonline store\b/, /\bstorefront\b/, /\bcheckout\b/, /\bproduct page\b/, /\bsubscriptions?\b/],
-    rationale: 'The posting is centered on an online store, product pages, checkout, or ecommerce conversion.',
+    patterns: [/\bshopify\b/, /\bwoocommerce\b/, /\bmagento\b/, /\bbigcommerce\b/, /\bonline store\b/, /\bstorefront\b/, /\bproduct upload\b/, /\bproduct listing\b/, /\btheme tweak\b/, /\bstore setup\b/],
+    rationale: 'The posting is mainly ecommerce platform setup, configuration, product listing, or storefront administration.',
   },
   {
     tag: 'crm-erp-business-systems',
@@ -85,14 +86,19 @@ const RULES = [
     rationale: 'The buyer mainly needs workflow automation or systems connected together.',
   },
   {
-    tag: 'web-app-saas',
-    patterns: [/\bsaas\b/, /\bdashboard\b/, /\badmin panel\b/, /\bcustomer portal\b/, /\bmarketplace\b/, /\bbooking platform\b/, /\binternal web app\b/, /\bweb app\b/, /\bfull stack\b/, /\blogin\b/],
-    rationale: 'The posting describes a custom web product with application features or workflows.',
+    tag: 'web-design',
+    patterns: [/\bfigma\b/, /\bui\/ux\b/, /\bux\/ui\b/, /\bmock-?up\b/, /\bwireframe\b/, /\bprototype\b/, /\bhomepage concept\b/, /\btheme design\b/, /\bstyle guide\b/, /\bmood board\b/, /\bbrand identity\b/, /\bvisual redesign\b/, /\bdesigner\b/],
+    rationale: 'The posting is primarily design, UX, mockup, branding, or visual web work rather than implementation.',
   },
   {
-    tag: 'website-build-redesign',
-    patterns: [/\bwordpress\b/, /\bwebflow\b/, /\bwix\b/, /\bsquarespace\b/, /\blanding page\b/, /\bwebsite\b/, /\bhomepage\b/, /\bredesign\b/, /\bportfolio\b/, /\bcms\b/, /\bseo\b/],
-    rationale: 'The main value is a website, landing page, CMS site, redesign, or brand presence.',
+    tag: 'conversion-seo-sales',
+    patterns: [/\bseo\b/, /\bcro\b/, /\bconversion(?: rate)? optimization\b/, /\bincrease (?:sales|leads|conversions|traffic)\b/, /\bsales funnel\b/, /\blead generation\b/, /\btechnical seo\b/, /\bgoogle analytics\b/, /\btracking setup\b/, /\bad pixel\b/, /\bmeta pixel\b/, /\bspeed optimization\b/, /\bpage speed\b/],
+    rationale: 'The main outcome is more traffic, leads, conversions, sales, or measurable marketing performance.',
+  },
+  {
+    tag: 'web-app-development',
+    patterns: [/\bwordpress\b/, /\bwebflow\b/, /\bwix\b/, /\bsquarespace\b/, /\blanding page\b/, /\bwebsite\b/, /\bhomepage\b/, /\bportfolio\b/, /\bcms\b/, /\bsaas\b/, /\bdashboard\b/, /\badmin panel\b/, /\bcustomer portal\b/, /\bmarketplace\b/, /\bbooking platform\b/, /\binternal web app\b/, /\bweb app\b/, /\bfull stack\b/, /\blogin\b/, /\bcheckout\b/, /\bpayment\b/, /\bcustom shopify\b/, /\bcustom woocommerce\b/],
+    rationale: 'The posting is real web development across websites, web apps, SaaS, portals, marketplaces, or custom ecommerce.',
   },
   {
     tag: 'backend-api-infrastructure',
@@ -149,6 +155,10 @@ function textFor(job) {
   return normalize(`${job.title ?? ''} ${job.description ?? ''} ${skills} ${occupations}`);
 }
 
+function contentTextFor(job) {
+  return normalize(`${job.title ?? ''} ${job.description ?? ''}`);
+}
+
 function matchesAny(text, patterns) {
   return patterns.some((pattern) => pattern.test(text));
 }
@@ -192,14 +202,80 @@ function isAutomationPrimaryJob(text) {
   ].some((pattern) => pattern.test(titleAndOpening));
 }
 
+function isWebDesignPrimaryJob(text) {
+  const titleAndOpening = text.slice(0, 900);
+  return [
+    /\bfigma\b/,
+    /\bui\/ux\b/,
+    /\bux\/ui\b/,
+    /\bmock-?up\b/,
+    /\bwireframe\b/,
+    /\bprototype\b/,
+    /\bhomepage concept\b/,
+    /\btheme design\b/,
+    /\bstyle guide\b/,
+    /\bmood board\b/,
+    /\bbrand identity\b/,
+    /\bvisual redesign\b/,
+    /\bdesigner\b/,
+  ].some((pattern) => pattern.test(titleAndOpening))
+    && !/\b(full stack|backend|api|database|auth|login|dashboard|portal|marketplace|build and develop|develop(?:er|ment)?|implement|code|coding)\b/.test(titleAndOpening);
+}
+
+function isConversionPrimaryJob(text) {
+  const titleAndOpening = text.slice(0, 1200);
+  const hasOptimizationSignal = [
+    /\bseo\b/,
+    /\bcro\b/,
+    /\bconversion(?: rate)? optimization\b/,
+    /\bincrease (?:sales|leads|conversions|traffic)\b/,
+    /\bsales funnel\b/,
+    /\btechnical seo\b/,
+    /\bgoogle analytics\b/,
+    /\btracking setup\b/,
+    /\bad pixel\b/,
+    /\bmeta pixel\b/,
+    /\bspeed optimization\b/,
+    /\bpage speed\b/,
+  ].some((pattern) => pattern.test(titleAndOpening));
+  const hasWebSalesContext = /\b(website|web site|landing page|shopify|woocommerce|store|e-?commerce|funnel|checkout|product page|wordpress|webflow|wix|squarespace)\b/.test(titleAndOpening);
+  return hasOptimizationSignal
+    && hasWebSalesContext
+    && !/\b(build|develop|full stack|backend|saas|dashboard|portal|marketplace)\b/.test(titleAndOpening);
+}
+
+function isEcommerceStorefrontPrimaryJob(text) {
+  const titleAndOpening = text.slice(0, 1200);
+  const hasStorefrontSignal = [
+    /\bshopify\b/,
+    /\bwoocommerce\b/,
+    /\bmagento\b/,
+    /\bbigcommerce\b/,
+    /\bonline store\b/,
+    /\bstorefront\b/,
+    /\bproduct upload\b/,
+    /\bproduct listing\b/,
+    /\btheme tweak\b/,
+    /\bstore setup\b/,
+  ].some((pattern) => pattern.test(titleAndOpening));
+  const isPlainWordPress = /\bwordpress\b/.test(titleAndOpening)
+    && !/\b(woocommerce|shopify|magento|bigcommerce)\b/.test(titleAndOpening);
+  return hasStorefrontSignal
+    && !isPlainWordPress
+    && !/\b(custom|full stack|backend|api|database|saas|marketplace|portal|app|headless|laravel|react|next\.?js)\b/.test(titleAndOpening);
+}
+
 function classifyPrimary(text) {
   const rule = RULES.find((candidate) => {
     if (candidate.tag === 'qa-testing-review') return isTestingOnlyJob(text);
     if (candidate.tag === 'automation-integration') return isAutomationPrimaryJob(text);
+    if (candidate.tag === 'web-design') return isWebDesignPrimaryJob(text);
+    if (candidate.tag === 'conversion-seo-sales') return isConversionPrimaryJob(text);
+    if (candidate.tag === 'ecommerce-storefront') return isEcommerceStorefrontPrimaryJob(text);
     return matchesAny(text, candidate.patterns);
   });
   return rule ?? {
-    tag: 'web-app-saas',
+    tag: 'web-app-development',
     rationale: 'The posting is in software development and most closely resembles a custom web product or application request.',
   };
 }
@@ -268,7 +344,7 @@ function validate(record) {
 
 export function classify(job) {
   const text = textFor(job);
-  const primary = classifyPrimary(text);
+  const primary = classifyPrimary(contentTextFor(job));
   const stack = inferStack(text);
   const businessContext = inferContext(text, primary.tag);
   const record = {

@@ -20,28 +20,40 @@ expressing?
 
 ## Primary Tags
 
-### `website-build-redesign`
+### `web-app-development`
 
-General websites, landing pages, redesigns, portfolio sites, marketing sites,
-and CMS sites where the main value is presence, design, conversion, or content.
+Real web development work across websites, web apps, SaaS products, portals,
+marketplaces, custom ecommerce, payment flows, and API-connected web products.
 
-Typical examples: WordPress site, Webflow site, Wix site, landing page,
-website redesign, company website, SEO page work.
+Typical examples: custom WordPress development, React/Next app, SaaS dashboard,
+customer portal, marketplace, booking platform, custom Shopify app or checkout,
+Laravel website, full-stack web build, payment-enabled web product.
+
+### `web-design`
+
+Design-only or mostly visual web work where implementation is not the main
+request.
+
+Typical examples: Figma mockup, UI/UX design, homepage concept, landing-page
+design, theme design, brand style guide, website visual redesign.
+
+### `conversion-seo-sales`
+
+Optimization work where the main outcome is more traffic, leads, conversions,
+sales, or measurable marketing performance.
+
+Typical examples: SEO, CRO, conversion optimization, speed optimization,
+technical SEO, analytics, ad pixels, tracking setup, landing-page optimization,
+sales funnel improvement.
 
 ### `ecommerce-storefront`
 
-Online stores and buying flows.
+Storefront and ecommerce platform setup/configuration where the main work is
+not custom product engineering.
 
-Typical examples: Shopify, WooCommerce, Magento, BigCommerce, product pages,
-checkout, subscriptions, ecommerce conversion optimization, marketplace stores.
-
-### `web-app-saas`
-
-Custom web products where users log in, manage workflows, or use product
-features.
-
-Typical examples: SaaS app, dashboard, admin panel, customer portal,
-marketplace, booking platform, internal web app, multi-role product.
+Typical examples: Shopify store setup, WooCommerce configuration, product
+uploads, theme tweaks, app configuration, store admin setup, basic storefront
+configuration.
 
 ### `mobile-app`
 
@@ -214,14 +226,18 @@ Examples:
    implementation stack.
 2. If AI is central to the requested outcome, use `ai-apps-agents`, whether AI
    is the product or a feature added to another product.
-3. If the job is ecommerce and also a website redesign, use
-   `ecommerce-storefront`.
-4. If the job is an internal business platform built in Zoho, Salesforce, Odoo,
+3. If the job is design-only or mostly visual design, use `web-design`.
+4. If the main outcome is SEO, CRO, speed, tracking, leads, or sales
+   improvement, use `conversion-seo-sales`.
+5. If ecommerce work is platform setup/configuration with little custom code,
+   use `ecommerce-storefront`. If it is custom ecommerce development, use
+   `web-app-development`.
+6. If the job is an internal business platform built in Zoho, Salesforce, Odoo,
    ERPNext, or HubSpot, use `crm-erp-business-systems`.
-5. If the job is trading-related, use `trading-software` even when it looks like
+7. If the job is trading-related, use `trading-software` even when it looks like
    a normal web app, desktop app, automation, or data pipeline.
-6. If the job asks only for testing or review, use `qa-testing-review`.
-7. If the job is mainly API, cloud, deployment, or backend work with no clearer
+8. If the job asks only for testing or review, use `qa-testing-review`.
+9. If the job is mainly API, cloud, deployment, or backend work with no clearer
    product context, use `backend-api-infrastructure`.
 
 ## Output Shape
