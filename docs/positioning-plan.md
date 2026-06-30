@@ -26,7 +26,8 @@ Good fit:
 - execution dashboards
 - backtesting systems
 - strategy tooling
-- TradingView, MetaTrader, NinjaTrader, Interactive Brokers, Alpaca, Binance
+- TradingView, Pine Script, MetaTrader, NinjaTrader, Interactive Brokers,
+  Alpaca, Binance
 - scanners, alerts, portfolio tools, and risk tools
 
 Buyer outcome:
@@ -153,6 +154,7 @@ Trading:
 - backtesting
 - execution dashboard
 - TradingView
+- Pine Script
 - Interactive Brokers
 - Alpaca
 - Binance API
