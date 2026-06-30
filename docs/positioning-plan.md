@@ -161,7 +161,14 @@ AI Agents:
 
 - AI agent
 - AI workflow
+- chatbot
+- AI chatbot
 - OpenAI integration
+- Claude integration
+- Anthropic Claude
+- Claude API
+- LangChain
+- RAG
 - research agent
 - reporting agent
 - CRM agent
