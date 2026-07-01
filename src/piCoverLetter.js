@@ -6,6 +6,7 @@ import {
 } from './piCli.js';
 
 const MAX_DESCRIPTION_CHARS = 1800;
+export const ASYNC_COMMUNICATION_CLOSING = 'I’m a strong believer in clear and efficient async communication. I typically share updates, feedback, and deliverables via detailed messages and screen-recorded videos (Loom) so you can review everything at your convenience with full context. This approach helps us move faster while avoiding unnecessary meeting fatigue. I’m also happy to schedule a short call if it’s needed to align on scope or clarify complex requirements.';
 
 function promptForCoverLetter(job, retry = false) {
   const retryPrefix = retry
@@ -29,20 +30,27 @@ function promptForCoverLetter(job, retry = false) {
   return `${retryPrefix}Write a concise Upwork proposal cover letter for Ahmed Khattab.
 Return JSON only: {"coverLetter":"..."}
 Style: direct, confident, practical, no hype, no greeting with client name, no placeholders, no markdown.
-Length: 90-140 words.
+Length: 90-140 words before the fixed final paragraph.
 Mention only relevant fit. Do not promise guaranteed trading returns. Do not mention that AI generated this.
+The system will append this exact final paragraph after your cover letter, so do not write or paraphrase it yourself: ${ASYNC_COMMUNICATION_CLOSING}
 Use this job context: ${JSON.stringify(payload)}`;
+}
+
+function withoutAsyncCommunicationClosing(text) {
+  const marker = 'I’m a strong believer in clear and efficient async communication.';
+  const markerIndex = text.indexOf(marker);
+  return markerIndex === -1 ? text : text.slice(0, markerIndex).trim();
 }
 
 function validateCoverLetter(value) {
   if (!value || typeof value !== 'object') {
     throw new Error('PI cover letter response is not an object');
   }
-  const coverLetter = String(value.coverLetter ?? '').trim();
+  const coverLetter = withoutAsyncCommunicationClosing(String(value.coverLetter ?? '').trim());
   if (coverLetter.length < 80) {
     throw new Error('PI cover letter response is too short');
   }
-  return coverLetter;
+  return `${coverLetter}\n\n${ASYNC_COMMUNICATION_CLOSING}`;
 }
 
 export async function generateCoverLetterWithPi(job, options = {}) {
