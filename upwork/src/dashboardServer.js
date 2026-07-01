@@ -2,7 +2,7 @@ import { createServer as createHttpServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { extname, join, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { loadDashboardJobs, refreshDashboardJobs, suggestCoverLetterForJob } from './dashboardStore.js';
 
@@ -10,8 +10,9 @@ const PORT = Number(process.env.DASHBOARD_PORT ?? 5173);
 const HOST = process.env.DASHBOARD_HOST ?? '0.0.0.0';
 const PUBLIC_HOST = process.env.DASHBOARD_PUBLIC_HOST ?? 'studio.tailcc4c77.ts.net';
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const DASHBOARD_ROOT = resolve('dashboard');
-const DIST_ROOT = resolve('dashboard/dist');
+const APP_ROOT = fileURLToPath(new URL('..', import.meta.url));
+const DASHBOARD_ROOT = join(APP_ROOT, 'dashboard');
+const DIST_ROOT = join(DASHBOARD_ROOT, 'dist');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',

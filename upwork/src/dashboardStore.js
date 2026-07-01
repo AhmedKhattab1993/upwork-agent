@@ -1,14 +1,17 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { ensureProposalTemplate, generateCoverLetterWithPi } from './piCoverLetter.js';
 import { classifyLaneCandidatesWithPi } from './piLaneClassifier.js';
 import { classifyLane, LANES } from './positioningLanes.js';
 import { fetchRecentPositioningJobs, POSITIONING_SEARCH_SOURCE } from './upworkJobs.js';
 
-const CACHE_PATH = resolve('data/dashboard-lane-jobs.json');
-const SEED_JOBS_PATH = resolve('data/latest-software-dev-1000.jsonl');
+const APP_ROOT = fileURLToPath(new URL('..', import.meta.url));
+const DATA_ROOT = join(APP_ROOT, 'data');
+const CACHE_PATH = join(DATA_ROOT, 'dashboard-lane-jobs.json');
+const SEED_JOBS_PATH = join(DATA_ROOT, 'latest-software-dev-1000.jsonl');
 const DEFAULT_LOOKBACK_HOURS = 72;
 const EXCLUDED_CLIENT_COUNTRIES = new Set([
   'india',
