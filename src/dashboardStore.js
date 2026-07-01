@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
-import { ensureAsyncCommunicationClosing, generateCoverLetterWithPi } from './piCoverLetter.js';
+import { ensureProposalTemplate, generateCoverLetterWithPi } from './piCoverLetter.js';
 import { classifyLaneCandidatesWithPi } from './piLaneClassifier.js';
 import { classifyLane, LANES } from './positioningLanes.js';
 import { fetchRecentPositioningJobs, POSITIONING_SEARCH_SOURCE } from './upworkJobs.js';
@@ -119,6 +119,7 @@ function compactJob(job, laneInfo, existing = null, now = new Date().toISOString
     budget,
     skills: (job.skills ?? []).map((skill) => skill.prettyName ?? skill.name).filter(Boolean).slice(0, 10),
     client: {
+      name: client.name ?? client.firstName ?? client.contactName ?? existing?.client?.name ?? null,
       hires: client.totalHires ?? null,
       postedJobs: client.totalPostedJobs ?? null,
       spent: client.totalSpent?.displayValue ?? null,
@@ -132,15 +133,15 @@ function compactJob(job, laneInfo, existing = null, now = new Date().toISOString
     firstSeenAt: existing?.firstSeenAt ?? now,
     lastSeenAt: now,
     seenCount: (existing?.seenCount ?? 0) + 1,
-    suggestedCoverLetter: normalizeSuggestedCoverLetter(existing?.suggestedCoverLetter),
+    suggestedCoverLetter: normalizeSuggestedCoverLetter(existing?.suggestedCoverLetter, existing),
   };
 }
 
-function normalizeSuggestedCoverLetter(suggestedCoverLetter) {
+function normalizeSuggestedCoverLetter(suggestedCoverLetter, job = null) {
   if (!suggestedCoverLetter?.text) return suggestedCoverLetter ?? null;
   return {
     ...suggestedCoverLetter,
-    text: ensureAsyncCommunicationClosing(suggestedCoverLetter.text),
+    text: ensureProposalTemplate(suggestedCoverLetter.text, job),
   };
 }
 
@@ -215,7 +216,7 @@ function normalizeDashboardState(state) {
     .filter((job) => isWithinLookback(job, cutoff))
     .map((job) => ({
       ...job,
-      suggestedCoverLetter: normalizeSuggestedCoverLetter(job.suggestedCoverLetter),
+      suggestedCoverLetter: normalizeSuggestedCoverLetter(job.suggestedCoverLetter, job),
     })));
   return {
     ...state,
@@ -292,7 +293,7 @@ export async function suggestCoverLetterForJob(jobId, options = {}) {
   if (job.suggestedCoverLetter && !options.force) {
     return {
       jobId: job.id,
-      suggestedCoverLetter: normalizeSuggestedCoverLetter(job.suggestedCoverLetter),
+      suggestedCoverLetter: normalizeSuggestedCoverLetter(job.suggestedCoverLetter, job),
     };
   }
 
@@ -323,6 +324,7 @@ function compactJobToRawJob(job) {
     hourlyBudgetMin: null,
     hourlyBudgetMax: null,
     client: {
+      name: job.client?.name ?? null,
       totalHires: job.client?.hires ?? null,
       totalPostedJobs: job.client?.postedJobs ?? null,
       totalSpent: job.client?.spent ? { displayValue: job.client.spent } : null,
